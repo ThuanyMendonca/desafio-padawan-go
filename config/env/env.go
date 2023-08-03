@@ -3,6 +3,7 @@ package env
 import (
 	"fmt"
 	"os"
+	"strconv"
 
 	"github.com/joho/godotenv"
 )
@@ -17,8 +18,9 @@ type DataBase struct {
 }
 
 var (
-	GinMode   string
-	ProjectDb DataBase
+	GinMode       string
+	DbConnection  DataBase
+	AwesomeApiUrl string
 )
 
 func Load() {
@@ -28,12 +30,11 @@ func Load() {
 
 	GinMode = os.Getenv("GIN_MODE")
 
-	ProjectDb = DataBase{}
-	ProjectDb.Host = os.Getenv("DB_HOST")
-	ProjectDb.User = os.Getenv("DB_USER")
-	ProjectDb.Name = os.Getenv("DB_DB_NAME")
-	ProjectDb.Password = os.Getenv("DB_PASSWORD")
-	ProjectDb.TimeZone = os.Getenv("DB_TIME_ZONE")
-	os.Getenv("DB_PORT")
-
+	DbConnection = DataBase{}
+	DbConnection.Host = os.Getenv("DB_HOST")
+	DbConnection.User = os.Getenv("DB_USER")
+	DbConnection.Name = os.Getenv("DB_NAME")
+	DbConnection.Password = os.Getenv("DB_PASSWORD")
+	DbConnection.TimeZone = os.Getenv("DB_TIME_ZONE")
+	DbConnection.Port, _ = strconv.ParseInt(os.Getenv("DB_PORT"), 10, 64)
 }
