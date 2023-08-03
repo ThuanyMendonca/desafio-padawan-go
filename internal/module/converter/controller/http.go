@@ -29,8 +29,8 @@ func (cc *ConverterController) GetCurrentyConverter(c *gin.Context) {
 	rateParsed, _ := strconv.ParseFloat(rate, 64)
 
 	params := &domain.CurrencyConverter{
-		From:   domain.CurrentyEnum(c.Param("from")),
-		To:     domain.CurrentyEnum(c.Param("to")),
+		From:   domain.CurrencyEnum(c.Param("from")),
+		To:     domain.CurrencyEnum(c.Param("to")),
 		Amount: amountParsed,
 		Rate:   rateParsed,
 	}

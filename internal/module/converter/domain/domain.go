@@ -7,25 +7,25 @@ import (
 )
 
 var (
-	ErrRequiredSymbol = errors.New("symbol is required")
-	ErrInvalidSymbol  = errors.New("an error has occurred: invalid symbol")
-	ErrInvalidAmount  = errors.New("amount is invalid")
+	ErrRequiredCurrency = errors.New("symbol is required")
+	ErrInvalidCurrency  = errors.New("an error has occurred: invalid symbol")
+	ErrInvalidAmount    = errors.New("amount is invalid")
 )
 
-type CurrentyEnum string
+type CurrencyEnum string
 
 const (
-	Real   CurrentyEnum = "BRL"
-	Dollar CurrentyEnum = "USD"
-	Euro   CurrentyEnum = "EUR"
-	Btc    CurrentyEnum = "BTC"
+	Real   CurrencyEnum = "BRL"
+	Dollar CurrencyEnum = "USD"
+	Euro   CurrencyEnum = "EUR"
+	Btc    CurrencyEnum = "BTC"
 )
 
-func (s CurrentyEnum) String() string {
+func (s CurrencyEnum) String() string {
 	return string(s)
 }
 
-func (CurrentyEnum) Values() []string {
+func (CurrencyEnum) Values() []string {
 	return []string{
 		Real.String(),
 		Dollar.String(),
@@ -34,9 +34,9 @@ func (CurrentyEnum) Values() []string {
 	}
 }
 
-func (s CurrentyEnum) Validate() error {
+func (s CurrencyEnum) Validate() error {
 	if s.String() == "" {
-		return ErrRequiredSymbol
+		return ErrRequiredCurrency
 	}
 
 	for _, v := range s.Values() {
@@ -44,13 +44,13 @@ func (s CurrentyEnum) Validate() error {
 			return nil
 		}
 	}
-	return ErrInvalidSymbol
+	return ErrInvalidCurrency
 }
 
 type CurrencyConverter struct {
 	Id     uuid.UUID    `json:"id"`
-	From   CurrentyEnum `json:"from"`
-	To     CurrentyEnum `json:"to"`
+	From   CurrencyEnum `json:"from"`
+	To     CurrencyEnum `json:"to"`
 	Amount float64      `json:"amount"`
 	Rate   float64      `json:"rate"`
 }
