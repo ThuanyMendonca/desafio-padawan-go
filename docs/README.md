@@ -21,7 +21,7 @@ go run ./cmd/server/main.go
 # Exemplo de requisição
 
 ```json
-  * http://localhost:8000/exchange/10/BRL/USD/4.50
+  http://localhost:8000/exchange/10/BRL/USD/4.50
 ```
 
 ## Variáveis de ambiente
